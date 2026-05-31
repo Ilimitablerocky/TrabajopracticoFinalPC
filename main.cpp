@@ -9,6 +9,7 @@ using namespace std;
 /*int generar_prioridad_aleatoria{
 	return 1/0
 }
+//BRUNO
 ///PARTE 1
 */paquete Buscar_mayor_prioridad(){
 	for int f hasta cantidad_maxima_estanteria
