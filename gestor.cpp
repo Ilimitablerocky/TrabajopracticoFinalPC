@@ -21,8 +21,8 @@
 
         wait(mutex_cinta); // Se bloquea el mutex de la cinta
             cinta.push(p);  // se coloca el paquete en la cinta
-            cout << "Gestor colocó paquete ID=" << p.id                          //  Print para verificar los id de los paquetes (debugg principalmente) 
-                 << " prioridad=" << p.prioridad << " en la cinta." << endl;     //  Print para ver que la prioridad sea la correcta (debugg principalmente) [de nuevo] 
+            cout << "Gestor coloco paquete ID = " << p.id           //  Print para verificar los id de los paquetes (debugg principalmente) 
+                 << " -- Prioridad = " << p.prioridad << endl;      //  Print para ver que la prioridad sea la correcta (debugg principalmente) [de nuevo] 
         signal(mutex_cinta);  // Se desbloquea el mutex de la cinta
 
         signal(sem_cinta_llena);  // Se avisa de un nuevo paquete en la cinta para el consumidor
