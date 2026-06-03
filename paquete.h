@@ -12,4 +12,7 @@ struct Paquete{
 
 void Crear_Paquete(Paquete& p, int nro, int prioridad);
 void mostrar_Paquete(Paquete& p);
+
+Paquete buscar_mayor_prioridad(Paquete vec[]);
+
 #endif // PAQUETE_H_INCLUDED
