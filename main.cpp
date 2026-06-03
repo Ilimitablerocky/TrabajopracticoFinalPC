@@ -15,7 +15,7 @@ const int cantidad_Maxima_cinta = 5;
 
 //ESTANTERIA...
 Paquete estanteria[cantidad_Maxima_Estanteria];
-std::mutex mutex_estate;
+std::mutex mutex_estanteria;
 Semaforo sem_estanteria;
 Semaforo sem_espacio_estanteria;
 
