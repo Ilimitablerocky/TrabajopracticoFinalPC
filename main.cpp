@@ -1,8 +1,30 @@
 #include <iostream>
 #include <mutex>
-#include <
-//int cantidad_Maxima_paquete 1550; 
-//int cantidad_maxixa_estanteria 100;
+#include <thread>
+#include <chrono>
+#include <queue>
+#include "paquete.h"
+#include "semaforo.h"
+
+#include "gestor.h"
+
+//LIMITES DEL SISTEMA
+const int cantidad_Maxima_Paquetes = 1550;
+const int cantidad_Maxima_Estanteria = 100;
+const int cantidad_Maxima_cinta = 5;
+
+//ESTANTERIA...
+Paquete estanteria[cantidad_Maxima_Estanteria];
+std::mutex mutex_estate;
+Semaforo sem_estanteria;
+Semaforo sem_espacio_estanteria;
+
+//CINTA...
+std::queue<Paquete> cinta;
+std::mutex mutex_cinta;
+Semaforo sem_cinta;
+Semaforo sem_espacio_cinta;
+
 
 using namespace std;
 
