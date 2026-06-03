@@ -28,16 +28,20 @@ Semaforo sem_espacio_cinta;
 
 using namespace std;
 
-/*int generar_prioridad_aleatoria{
+/*
+int generar_prioridad_aleatoria{
 	return 1/0
 }
+
 //BRUNO
 ///PARTE 1
-*/paquete Buscar_mayor_prioridad(){
+
+paquete Buscar_mayor_prioridad(){
 	for int f hasta cantidad_maxima_estanteria
 	se aplica aging
 	retorna paquete mayor prioridad
 }
+*/
 
 /*
 ///PARTE 2
@@ -75,8 +79,6 @@ void gestor(trabaja con el array c}y con la cola de datos{
 	coloca la caja en la cinta si hay espacio disponible
 	avisa se coloco caja
 }
-*/
-
 */
 
 int main()
