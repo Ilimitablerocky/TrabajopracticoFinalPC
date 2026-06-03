@@ -9,7 +9,7 @@
 
         
         wait(mutex_estanteria);  // Se bloquea el mutex de la estanteria
-            Paquete p = Buscar_mayor_prioridad(estanteria, cant_estanteria); // Busca y obtiene el paquete de mayor prioridad en la estanteria
+            Paquete p = buscar_mayor_prioridad(estanteria, cant_estanteria); // Busca y obtiene el paquete de mayor prioridad en la estanteria
             cant_estanteria--;  // Se reduce la cantidad de paquetes en la estanteria 
         signal(mutex_estanteria);  // Se desbloquea el mutex de la estanteria
 
