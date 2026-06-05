@@ -1,6 +1,6 @@
 #include "gestor.h"
 
-//void gestor() {  //Dejo documentado que hay que revisar el nombre de la funcion Buscar_mayor_prioridad() y agregar el nombre correcto del .h en el archivo gestor.h
+void gestor() {  
     int procesados = 0;
 
     while (procesados < cantidad_Maxima_paquetes) {
@@ -20,9 +20,11 @@
         wait(sem_espacio_cinta);  // Se espera a que haya espacio en la cinta
 
         wait(mutex_cinta); // Se bloquea el mutex de la cinta
+            p.ingreso_cinta = chrono::system_clock::now();  // Se guarda el momento de ingreso a la cinta
             cinta.push(p);  // se coloca el paquete en la cinta
-            cout << "Gestor coloco paquete ID = " << p.id           //  Print para verificar los id de los paquetes (debugg principalmente) 
-                 << " -- Prioridad = " << p.prioridad << endl;      //  Print para ver que la prioridad sea la correcta (debugg principalmente) [de nuevo] 
+            cout << "Gestor coloco paquete ID = " << p.id           //  Print para verificar los id de los paquetes 
+                 << " -- Prioridad = " << p.prioridad      //  Print para ver que la prioridad sea la correcta
+                 << " -- Ingreso a la cinta = " << chrono::duration_cast<chrono::milliseconds>(p.ingreso_cinta - inicio_programa).count() << "ms" << endl; //  Print para ver el tiempo de ingreso del paquete a la cinta
         signal(mutex_cinta);  // Se desbloquea el mutex de la cinta
 
         signal(sem_cinta_llena);  // Se avisa de un nuevo paquete en la cinta para el consumidor
