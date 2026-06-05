@@ -13,6 +13,9 @@ const int cantidad_Maxima_Paquetes = 1550;
 const int cantidad_Maxima_Estanteria = 100;
 const int cantidad_Maxima_cinta = 5;
 
+//VARIABLE productor/gestor
+int cantidad_actual_estanteria = 0;
+
 //ESTANTERIA...
 Paquete estanteria[cantidad_Maxima_Estanteria];
 std::mutex mutex_estanteria;
