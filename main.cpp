@@ -15,6 +15,7 @@ const int cantidad_Maxima_cinta = 5;
 
 //VARIABLE productor/gestor
 int cantidad_actual_estanteria = 0;
+chrono::system_clock::time_point inicio_programa = chrono::system_clock::now();
 
 //ESTANTERIA...
 Paquete estanteria[cantidad_Maxima_Estanteria];
