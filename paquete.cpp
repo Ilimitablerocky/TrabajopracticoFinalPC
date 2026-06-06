@@ -3,7 +3,7 @@
 void Crear_Paquete(Paquete& p, int nro, int prioridad){
     p.id = nro;
     p.prioridad = prioridad;
-    p.creacion = std::chrono::systemclock::now();
+    p.creacion = std::chrono::system_clock::now();
 }
 
 void mostrar_Paquete(Paquete& p){
