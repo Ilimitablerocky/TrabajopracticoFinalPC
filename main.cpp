@@ -8,7 +8,7 @@
 const int cantidad_Maxima_Paquetes = 1550;
 const int cantidad_Maxima_Estanteria = 100;
 const int cantidad_Maxima_cinta = 5;
-const int frecuencia_prioridad_0 = 20;          //cada cuantos paquetes se crea un paquete con prioridad 0
+const int frecuencia_prioridad_0 = 200;          //cada cuantos paquetes se crea un paquete con prioridad 0
 
 //VARIABLE productor/gestor
 int cantidad_actual_estanteria = 0;
