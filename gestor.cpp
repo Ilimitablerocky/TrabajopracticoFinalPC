@@ -12,11 +12,12 @@ void gestor() {
         cantidad_actual_estanteria--;  // Se reduce la cantidad de paquetes en la estanteria
 
         auto ahora = chrono::system_clock::now();
+        auto espera = chrono::duration_cast<chrono::milliseconds>(ahora - p.creacion).count();
 
         if(p.prioridad == 0){
-            tiempo_espera_p0 += chrono::duration_cast<chrono::milliseconds>(ahora - p.creacion).count();
+            tiempo_espera_p0 += espera;
         }else{
-            tiempo_espera_p1 += chrono::duration_cast<chrono::milliseconds>(ahora - p.creacion).count();
+            tiempo_espera_p1 += espera;
         }
         
         mutex_estanteria.unlock();  // Se desbloquea el mutex de la estanteria
