@@ -24,7 +24,7 @@ extern Semaforo sem_espacio_estanteria;
 extern std::mutex mutex_consola;
 extern std::mutex mutex_idpaquete;
 
-int generar_prioridad_con_frecuencia(int cada_cuanto);
+int generar_prioridad_con_frecuencia(int cada_cuantos_paquetes);
 
 void productor(int id, int paquetes_x_productor);
 
