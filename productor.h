@@ -12,6 +12,8 @@ extern const int cantidad_Maxima_cinta;
 
 //VARIABLE productor/gestor
 extern int cantidad_actual_estanteria;
+extern int numero_paquete;
+extern std::mutex mutex_idpaquete;
 
 //ESTANTERIA...
 extern Paquete estanteria[];
