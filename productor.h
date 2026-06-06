@@ -13,7 +13,7 @@ extern const int frecuencia_prioridad_0;
 extern int cantidad_actual_estanteria;
 extern int numero_paquete;
 extern int cant_producidos_p1;
-extern int cat_producidos_p0;
+extern int cant_producidos_p0;
 
 //ESTANTERIA...
 extern Paquete estanteria[];
