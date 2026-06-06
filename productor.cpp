@@ -17,7 +17,13 @@ void productor(int id, int paquetes_x_productor){
 
         Paquete nuevo;
         int x = generar_prioridad_con_frecuencia(40);
-        Crear_Paquete(nuevo,i,x);
+        
+        mutex_idpaquete.lock(); //protegemos el contador de paquetes
+        int id_temp = numero_paquete; // asignamos id_temp a una variable global la cual va incrementando
+        numero_paquete++; // se incrementa
+        mutex_idpaquete.unlock();
+
+        Crear_Paquete(nuevo, id_temp, x);
 
         wait(sem_espacio_estanteria);
 
