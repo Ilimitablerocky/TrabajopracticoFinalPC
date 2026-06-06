@@ -1,8 +1,6 @@
 #ifndef PRODUCTOR_H_INCLUDED
 #define PRODUCTOR_H_INCLUDED
 #include "paquete.h"
-#include <mutex>
-#include <chrono>
 #include "semaforo.h"
 #include <thread>
 
