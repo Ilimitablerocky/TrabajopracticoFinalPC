@@ -3,9 +3,10 @@
 #include <thread>
 #include <chrono>
 #include <queue>
+#include "consumidor.h"
+#include "productor.h"
 #include "paquete.h"
 #include "semaforo.h"
-
 #include "gestor.h"
 
 //LIMITES DEL SISTEMA
