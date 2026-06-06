@@ -36,6 +36,27 @@ Semaforo sem_espacio_cinta;
 
 using namespace std;
 
+void mostrarMetricas(int tp1, int tp0, int cantp1, int cantp0){
+    cout << endl << "\t --------------------------- METRICAS ----------------------------" << endl;
+    cout << "\t  CANTIDAD TOTAL DE PAQUETES PRODUCIDOS: " << cantp0 + cantp1 << endl;
+    if(cantp0 == 0 && cantp1 == 0){
+        cout << "\t  NO HUBO PRODUCCION POR LO TANTO NO HAY TIEMPOS DE ESPERA." << endl;
+    }else{
+        if(cantp0 == 0){
+            cout << "\t  NO HUBO PAQUETES CON PRIORIDAD 0." << endl;
+            cout << "\t  TIEMPO PROMEDIO DE ESPERA DE PAQUETES DE PRIORIDAD 1: " << (float)tp1 / cantp1 << "ms" << endl;
+        }else{
+            if(cant_producidos_p1 == 0){
+                cout << "\t  TIEMPO PROMEDIO DE ESPERA DE PAQUETES DE PRIORIDAD 0: " << (float)tp0 / cantp0 << "ms" << endl;
+                cout << "\t  NO HUBO PAQUETES CON PRIORIDAD 1." << endl;
+            }else{
+                cout << "\t  TIEMPO PROMEDIO DE ESPERA DE PAQUETES DE PRIORIDAD 0: " << (float)tp0 / cantp0 << "ms" << endl;
+                cout << "\t  TIEMPO PROMEDIO DE ESPERA DE PAQUETES DE PRIORIDAD 1: " << (float)tp1 / cantp1 << "ms" << endl;
+            }
+        }
+    }
+}
+
 int main() {
     //SEMAFOROS
     //ESTANTERIA
@@ -75,10 +96,7 @@ int main() {
     //productor_3.join();
     gestor_1.join();
 
-	cout << endl << "\t --------------------------- METRICAS ----------------------------" << endl;
-    cout << "\t  CANTIDAD TOTAL DE PAQUETES PRODUCIDOS: " << cant_producidos_p0 + cant_producidos_p1 << endl;
-    cout << "\t  TIEMPO PROMEDIO DE ESPERA DE PAQUETES DE PRIORIDAD 0: " << (float)tiempo_espera_p0 / cant_producidos_p0 << "ms" << endl;
-    cout << "\t  TIEMPO PROMEDIO DE ESPERA DE PAQUETES DE PRIORIDAD 1: " << (float)tiempo_espera_p1 / cant_producidos_p1 << "ms" << endl;
+	mostrarMetricas(tiempo_espera_p1, tiempo_espera_p0, cant_producidos_p1, cant_producidos_p0);
 
     return 0;
 }
