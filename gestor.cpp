@@ -25,7 +25,7 @@ void gestor() {
 
         wait(sem_espacio_cinta);  // Se espera a que haya espacio en la cinta
 
-        this_thread::sleep_for(chrono::milliseconds(420));  // Se espera 420ms simulando trafico o congestion
+        this_thread::sleep_for(chrono::milliseconds(420));  // Espera de 420ms simulando trafico o congestion entre asignaciones exitosas (pase a cinta)
 
         mutex_cinta.lock(); // Se bloquea el mutex de la cinta
         p.ingreso_cinta = chrono::system_clock::now();  // Se guarda el momento de ingreso a la cinta
