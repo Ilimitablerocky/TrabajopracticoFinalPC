@@ -12,8 +12,6 @@ extern const int frecuencia_prioridad_0;
 //VARIABLE productor/gestor
 extern int cantidad_actual_estanteria;
 extern int numero_paquete;
-extern std::mutex mutex_idpaquete;
-extern int numero_paquete;
 extern int cant_producidos_p1;
 extern int cat_producidos_p0;
 
