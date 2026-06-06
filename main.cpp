@@ -8,6 +8,7 @@
 const int cantidad_Maxima_Paquetes = 1550;
 const int cantidad_Maxima_Estanteria = 100;
 const int cantidad_Maxima_cinta = 5;
+const int frecuencia_prioridad_0 = 20;          //cada cuantos paquetes se crea un paquete con prioridad 0
 
 //VARIABLE productor/gestor
 int cantidad_actual_estanteria = 0;
@@ -16,8 +17,10 @@ int tiempo_espera_p1 = 0;
 int tiempo_espera_p0 = 0;
 int cant_producidos_p1 = 0;
 int cant_producidos_p0 = 0;
+int numero_paquete = 0;
 
 std::mutex mutex_consola;
+std::mutex mutex_idpaquete;
 
 //ESTANTERIA...
 Paquete estanteria[cantidad_Maxima_Estanteria];
