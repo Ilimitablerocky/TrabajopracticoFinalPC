@@ -31,62 +31,41 @@ Semaforo sem_espacio_cinta;
 
 
 using namespace std;
+int main() {
+    //SEMAFOROS
+    //ESTANTERIA
+    init(sem_estanteria, 0);
+    init(sem_espacio_estanteria, cantidad_Maxima_Estanteria);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
 
-/*
-int generar_prioridad_aleatoria{
-	return 1/0
-}
+    //productor
+    int cantidad_productores = 1;
+    int paquetes_x_productor = cantidad_Maxima_Paquetes / cantidad_productores;
+    int resto1 = cantidad_Maxima_Paquetes % cantidad_productores;
 
-//BRUNO
-///PARTE 1
+    // gestor
+    thread gest(gestor);
 
-paquete Buscar_mayor_prioridad(){
-	for int f hasta cantidad_maxima_estanteria
-	se aplica aging
-	retorna paquete mayor prioridad
-}
-*/
+	//productor
+    thread prod(productor, 1, paquetes_x_productor);
 
-/*
-///PARTE 2
-//void productor(int cantidad_maxima){
-	for int f hasta cantidad maxima
-	paquete nuevo_paquete;
-	crear_paquete(nuevo_paquete, f, generar_prioridad_aleatoria);
-	ingresamos a la estanteria(array capacidadx max 100);
-	esperamos 90ms
-	guardamos el paquete;
-}
-*/
-//NAHUEL
-///PARTE 3
-/*
-//void consumidor(int capacidad_maxima){
-	for hasta cantidad_maxima
-	esperamos la cinta(cola) que pasen 550 ms
-	saca el paquete
-	avisa lugar disponible cinta;
+    //consumidor 1550/3 = 516 resto = 2 quien lo trabaja?
+    int cantidad_consumidores = 3;
+    int paquetes_x_consumidor = cantidad_Maxima_Paquetes / cantidad_consumidores;
+    int resto = cantidad_Maxima_Paquetes % cantidad_consumidores;
 
-	"paquete procesado"
-}
-	
-*/
+    thread consumidor_1(consumidor, 1, paquetes_x_consumidor);
+    thread consumidor_2(consumidor, 2, paquetes_x_consumidor);
+    thread consumidor_3(consumidor, 3, paquetes_x_consumidor + resto);
 
-//DARIO
-///PARTE 4
-/*
-void gestor(trabaja con el array c}y con la cola de datos{
-	busca en la estanteria(array) si hay disponibilidad wait
-	funcion Buscar_mayor_prioridad retorna paquete
-	avisa hya espacion disponible al array
-	espera 420 ms
-	coloca la caja en la cinta si hay espacio disponible
-	avisa se coloco caja
-}
-*/
+    consumidor_1.join();
+    consumidor_2.join();
+    consumidor_3.join();
+    prod.join();
+    gest.join();
 
-int main()
-{
-    cout << "Hello world!" << endl;
     return 0;
 }
+
