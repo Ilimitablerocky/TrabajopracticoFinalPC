@@ -56,7 +56,7 @@ int main() {
     //thread productor_3(productor, 3, paquetes_x_productor + resto1);
 
     //consumidor 1550/3 = 516 resto = 2 quien lo trabaja?
-    int cantidad_consumidores = 3;
+    int cantidad_consumidores = 1;
     int paquetes_x_consumidor = cantidad_Maxima_Paquetes / cantidad_consumidores;
     //int resto = cantidad_Maxima_Paquetes % cantidad_consumidores;
 
