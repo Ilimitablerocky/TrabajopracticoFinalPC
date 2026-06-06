@@ -20,7 +20,7 @@ Paquete buscar_mayor_prioridad(Paquete vec[], int cantidad_estanteria){
             if(espera >= 6000){
                 Paquete p = vec[i];
                 for(int j = i; j < cantidad_estanteria - 1; j++){         //barre el arreglo para pisar el dato que se sacó
-                    vec[j] = vec [i+1];
+                    vec[j] = vec [j+1];
                 }
                 return p;
             }
@@ -31,7 +31,7 @@ Paquete buscar_mayor_prioridad(Paquete vec[], int cantidad_estanteria){
         if(vec[i].prioridad == 1){
             Paquete p = vec[i];
             for(int j = i; j < cantidad_estanteria - 1; j++){
-                    vec[j] = vec [i+1];
+                    vec[j] = vec [j+1];
             }
             return p;
         }
@@ -44,7 +44,7 @@ Paquete buscar_mayor_prioridad(Paquete vec[], int cantidad_estanteria){
         } else {
             Paquete p = vec[i];
             for(int j = i; j < cantidad_estanteria - 1; j++){
-                    vec[j] = vec [i+1];
+                    vec[j] = vec [j+1];
             }
             return p;
         }
