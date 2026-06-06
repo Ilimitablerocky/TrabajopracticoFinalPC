@@ -1,18 +1,22 @@
 #include "productor.h"
 
-int generar_prioridad_aleatoria(){
 
-    auto ahora = std::chrono::system_clock::now().time_since_epoch().count();
-    return (ahora/100000) %2;
-
-};
+int generar_prioridad_con_frecuencia(int intervalo_cero) {
+    static int contador = 0;
+    contador++;
+        if (contador == intervalo_cero) {
+        contador = 0; // Reiniciar el ciclo
+        return 0;
+    }
+    return 1;
+}
 
 void productor(int id, int paquetes_x_productor){
 
     for(int i=0; i < paquetes_x_productor; i++){
 
         Paquete nuevo;
-        int x = generar_prioridad_aleatoria();
+        int x = generar_prioridad_con_frecuencia(40);
         Crear_Paquete(nuevo,i,x);
 
         wait(sem_espacio_estanteria);
