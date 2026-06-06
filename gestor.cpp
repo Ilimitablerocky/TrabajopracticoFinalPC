@@ -14,9 +14,9 @@ void gestor() {
         auto ahora = chrono::system_clock::now();
 
         if(p.prioridad == 0){
-            tiempo_espera_p0 = chrono::duration_cast<chrono::milliseconds>(ahora - p.creacion).count();
+            tiempo_espera_p0 += chrono::duration_cast<chrono::milliseconds>(ahora - p.creacion).count();
         }else{
-            tiempo_espera_p1 = chrono::duration_cast<chrono::milliseconds>(ahora - p.creacion).count();
+            tiempo_espera_p1 += chrono::duration_cast<chrono::milliseconds>(ahora - p.creacion).count();
         }
         
         mutex_estanteria.unlock();  // Se desbloquea el mutex de la estanteria
