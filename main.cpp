@@ -12,10 +12,10 @@ const int cantidad_Maxima_cinta = 5;
 //VARIABLE productor/gestor
 int cantidad_actual_estanteria = 0;
 chrono::system_clock::time_point inicio_programa = chrono::system_clock::now();
-int tiempo_espera_p1;
-int tiempo_espera_p0;
-int cant_producidos_p1;
-int cant_producidos_p0;
+int tiempo_espera_p1 = 0;
+int tiempo_espera_p0 = 0;
+int cant_producidos_p1 = 0;
+int cant_producidos_p0 = 0;
 
 std::mutex mutex_consola;
 
