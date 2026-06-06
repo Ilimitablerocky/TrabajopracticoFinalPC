@@ -6,10 +6,18 @@ void Crear_Paquete(Paquete& p, int nro, int prioridad){
     p.creacion = std::chrono::system_clock::now();
 }
 
+char* mostrarFechaCreacion(Paquete p) {
+    std::time_t tiempoConvertido = std::chrono::system_clock::to_time_t(p.creacion);   //convertimos a tiempo que usamos
+    char* textoFecha = std::ctime(&tiempoConvertido);           //convertimos tiempo a string entendible
+    return textoFecha;
+}
+
 void mostrar_Paquete(Paquete& p){
-    std::cout << "Paquete: " << p.id << std::endl;
-    std::cout << "Prioridad: " << p.prioridad << std::endl;
-    std::cout << "Fecha Creacion: " << "FECHA_DE_CREACION" << std::endl;
+    mutex_consola.lock();
+    std::cout << " \t Paquete ID: " << p.id
+    << " - Prioridad: " << p.prioridad
+    << " - Fecha de Creacion: " << mostrarFechaCreacion(p) << std::endl;
+    mutex_consola.unlock();
 }
 
 Paquete buscar_mayor_prioridad(Paquete vec[], int cantidad_estanteria){
