@@ -72,5 +72,10 @@ int main() {
     //productor_3.join();
     gestor_1.join();
 
+	cout << endl << "\t --------------------------- METRICAS ----------------------------" << endl;
+    cout << "\t  CANTIDAD TOTAL DE PAQUETES PRODUCIDOS: " << cant_producidos_p0 + cant_producidos_p1 << endl;
+    cout << "\t  TIEMPO PROMEDIO DE ESPERA DE PAQUETES DE PRIORIDAD 0: " << (float)tiempo_espera_p0 / cant_producidos_p0 << "ms" << endl;
+    cout << "\t  TIEMPO PROMEDIO DE ESPERA DE PAQUETES DE PRIORIDAD 1: " << (float)tiempo_espera_p1 / cant_producidos_p1 << "ms" << endl;
+
     return 0;
 }
