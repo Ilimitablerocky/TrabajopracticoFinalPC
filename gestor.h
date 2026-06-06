@@ -1,7 +1,5 @@
 #include <queue>
 #include <thread>
-#include <chrono>
-#include <iostream>
 #include "paquete.h"
 #include "semaforo.h"
 
@@ -13,6 +11,8 @@ extern const int cantidad_Maxima_cinta;
 //VARIABLE productor/gestor
 extern int cantidad_actual_estanteria;
 extern chrono::system_clock::time_point inicio_programa;
+extern int tiempo_espera_p1;
+extern int tiempo_espera_p0;
 
 //ESTANTERIA...
 extern Paquete estanteria[];
