@@ -27,10 +27,9 @@ void consumidor(int id_consumidor, int paquetes_x_consumidores){ // consumidor s
                 std::this_thread::sleep_for(std::chrono::milliseconds(falta)); // esperamos los 320 ms y volvemos al principio
             }
         }
-        mostrar_Paquete(p); // se imprime el paquete liberado
-        std::cout << "Consumidor: " << id_consumidor << " Finalizo paquete" << std::endl;
+        std::cout << "Consumidor: " << id_consumidor << " Finalizo paquete: " <<p.id  << std::endl;
 
-        // Debe existir un retardo de 270ms entre cada liberación de paquete.
+        // Debe existir un retardo de 270ms entre cada liberaciÃ³n de paquete.
         std::this_thread::sleep_for(std::chrono::milliseconds(270));
 	}
 }
