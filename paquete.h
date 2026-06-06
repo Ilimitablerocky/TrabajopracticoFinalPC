@@ -2,6 +2,8 @@
 #define PAQUETE_H_INCLUDED
 #include <iostream>
 #include <chrono>
+#include <ctime>
+#include <mutex>
 
 struct Paquete{
     int id;
@@ -12,6 +14,8 @@ struct Paquete{
 
 void Crear_Paquete(Paquete& p, int nro, int prioridad);
 void mostrar_Paquete(Paquete& p);
+
+extern std::mutex mutex_consola;
 
 Paquete buscar_mayor_prioridad(Paquete vec[], int cantidad_estanteria);
 
