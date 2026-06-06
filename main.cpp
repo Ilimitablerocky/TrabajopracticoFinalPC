@@ -15,8 +15,10 @@ const int cantidad_Maxima_Estanteria = 100;
 const int cantidad_Maxima_cinta = 5;
 
 //VARIABLE productor/gestor
+int numero_paquete = 0;
 int cantidad_actual_estanteria = 0;
 chrono::system_clock::time_point inicio_programa = chrono::system_clock::now();
+std::mutex mutex_idpaquete;
 
 //ESTANTERIA...
 Paquete estanteria[cantidad_Maxima_Estanteria];
