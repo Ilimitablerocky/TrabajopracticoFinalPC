@@ -1,11 +1,11 @@
 #include "productor.h"
 
 
-int generar_prioridad_con_frecuencia(int intervalo_cero) {
+int generar_prioridad_con_frecuencia(int cada_cuantos_paquetes) {
     static int contador = 0;
     contador++;
-        if (contador == intervalo_cero) {
-        contador = 0; // Reiniciar el ciclo
+        if (contador == cada_cuantos_paquetes) {
+        contador = 0; // Reinicia el ciclo
         return 0;
     }
     return 1;
@@ -16,8 +16,14 @@ void productor(int id, int paquetes_x_productor){
     for(int i=0; i < paquetes_x_productor; i++){
 
         Paquete nuevo;
-        int x = generar_prioridad_con_frecuencia(8);
-        Crear_Paquete(nuevo,i+1,x);                                  //(producir paquete)
+        int x = generar_prioridad_con_frecuencia(frecuencia_prioridad_0);
+
+        mutex_idpaquete.lock(); //protegemos el contador de paquetes
+        int id_temp = numero_paquete; // asignamos id_temp a una variable global la cual va incrementando
+        numero_paquete++; // se incrementa
+        mutex_idpaquete.unlock();
+        
+        Crear_Paquete(nuevo,id_temp+1,x);                                  //(producir paquete)
 
         wait(sem_espacio_estanteria);
 
