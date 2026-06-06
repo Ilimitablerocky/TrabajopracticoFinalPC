@@ -21,6 +21,7 @@ extern std::mutex mutex_estanteria;
 extern Semaforo sem_estanteria;
 extern Semaforo sem_espacio_estanteria;
 
+extern std::mutex mutex_consola;
 
 int generar_prioridad_aleatoria();
 
