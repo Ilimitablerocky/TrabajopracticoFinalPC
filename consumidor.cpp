@@ -15,7 +15,8 @@ void consumidor(int id_consumidor, int paquetes_x_consumidores){ // consumidor s
             // devuelve un numero raro y lo casteamos a miliseugnos y sacamos un valor int
             auto diferencia = std::chrono::duration_cast<std::chrono::milliseconds>(actual-p.ingreso_cinta).count();
 
-            if(diferencia >= 550){ //770 > 550 entramos, sino...
+            if(diferencia >= 550){ //770 > 550 entramos, sino...(else)       (tiempo de paquetes en la cinta)
+                std::this_thread::sleep_for(std::chrono::milliseconds(270));            // Debe existir un retardo de 270ms entre cada liberación de paquete.  (procesar paquete)
                 cinta.pop(); // eliminamos el paquete de la cinta
                 mutex_cinta.unlock(); // debloqueamos la cinta y
                 signal(sem_espacio_cinta); // avisamos que hay lugar disponible
@@ -27,9 +28,9 @@ void consumidor(int id_consumidor, int paquetes_x_consumidores){ // consumidor s
                 std::this_thread::sleep_for(std::chrono::milliseconds(falta)); // esperamos los 320 ms y volvemos al principio
             }
         }
-        std::cout << "Consumidor: " << id_consumidor << " Finalizo paquete: " <<p.id  << std::endl;
-
-        // Debe existir un retardo de 270ms entre cada liberación de paquete.
-        std::this_thread::sleep_for(std::chrono::milliseconds(270));
+        mutex_consola.lock();
+        std::cout << std::endl << "Consumidor con ID: " << id_consumidor << " termino con el siguiente paquete:" << std::endl;
+        mutex_consola.unlock();
+        mostrar_Paquete(p); // se imprime el paquete liberado
 	}
 }
