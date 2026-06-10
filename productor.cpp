@@ -11,12 +11,12 @@ int generar_prioridad_con_frecuencia(int cada_cuantos_paquetes) {
     return 1;
 }
 
-void productor(int id, int paquetes_x_productor){
+void productor(int id, int paquetes_x_productor, int cada_cuantos_paquetes){
 
     for(int i=0; i < paquetes_x_productor; i++){
 
         Paquete nuevo;
-        int x = generar_prioridad_con_frecuencia(frecuencia_prioridad_0);
+        int x = generar_prioridad_con_frecuencia(cada_cuantos_paquetes);
 
         mutex_idpaquete.lock(); //protegemos el contador de paquetes
         int id_temp = numero_paquete; // asignamos id_temp a una variable global la cual va incrementando
@@ -24,8 +24,6 @@ void productor(int id, int paquetes_x_productor){
         mutex_idpaquete.unlock();
         
         Crear_Paquete(nuevo,id_temp+1,x);                                  //(producir paquete)
-
-        wait(sem_espacio_estanteria);
 
         std::this_thread::sleep_for(std::chrono::milliseconds(90)); //(colocar en estanteria)
 
