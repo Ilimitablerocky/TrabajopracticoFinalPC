@@ -5,10 +5,7 @@
 #include "gestor.h"
 
 //LIMITES DEL SISTEMA
-const int cantidad_Maxima_Paquetes = 1550;
-const int cantidad_Maxima_Estanteria = 100;
 const int cantidad_Maxima_cinta = 5;
-const int frecuencia_prioridad_0 = 200;          //cada cuantos paquetes se crea un paquete con prioridad 0
 
 //VARIABLE productor/gestor
 int cantidad_actual_estanteria = 0;
@@ -26,7 +23,6 @@ std::mutex mutex_idpaquete;
 Paquete estanteria[cantidad_Maxima_Estanteria];
 std::mutex mutex_estanteria;
 Semaforo sem_estanteria;
-Semaforo sem_espacio_estanteria;
 
 //CINTA...
 std::queue<Paquete> cinta;
@@ -58,45 +54,331 @@ void mostrarMetricas(int tp1, int tp0, int cantp1, int cantp0){
 }
 
 int main() {
-    //SEMAFOROS
-    //ESTANTERIA
+    /*
+    // CONFIGURACION C - ESCENARIO PRUEBA DE CARGA MASIVA
     init(sem_estanteria, 0);
-    init(sem_espacio_estanteria, cantidad_Maxima_Estanteria);
     //CINTA
     init(sem_cinta, 0);
     init(sem_espacio_cinta, cantidad_Maxima_cinta);
 
-    //productor
-    int cantidad_productores = 1;
-    int paquetes_x_productor = cantidad_Maxima_Paquetes / cantidad_productores;
-    //int resto1 = cantidad_Maxima_Paquetes % cantidad_productores;
-
     // gestor
-    thread gestor_1(gestor);
+    thread gestor_1(gestor, 1550);
+
+    int cada_cuantos_paquetes = 500;
 
 	//productor
-    thread productor_1(productor, 1, paquetes_x_productor);
-    //thread productor_2(productor, 2, paquetes_x_productor);
-    //thread productor_3(productor, 3, paquetes_x_productor + resto1);
+    thread productor_1(productor, 1, 516, cada_cuantos_paquetes);
+    thread productor_2(productor, 2, 517, cada_cuantos_paquetes);
+    thread productor_3(productor, 3, 517, cada_cuantos_paquetes);
 
-    //consumidor 1550/3 = 516 resto = 2 quien lo trabaja?
-    int cantidad_consumidores = 1;
-    int paquetes_x_consumidor = cantidad_Maxima_Paquetes / cantidad_consumidores;
-    //int resto = cantidad_Maxima_Paquetes % cantidad_consumidores;
-
-    thread consumidor_1(consumidor, 1, paquetes_x_consumidor);
-    //thread consumidor_2(consumidor, 2, paquetes_x_consumidor);
-    //thread consumidor_3(consumidor, 3, paquetes_x_consumidor + resto);
+    thread consumidor_1(consumidor, 1, 517);
+    thread consumidor_2(consumidor, 2, 517);
+    thread consumidor_3(consumidor, 3, 516);
 
     consumidor_1.join();
-    //consumidor_2.join();
-    //consumidor_3.join();
+    consumidor_2.join();
+    consumidor_3.join();
     productor_1.join();
-    //productor_2.join();
-    //productor_3.join();
+    productor_2.join();
+    productor_3.join();
     gestor_1.join();
+    */
 
-	mostrarMetricas(tiempo_espera_p1, tiempo_espera_p0, cant_producidos_p1, cant_producidos_p0);
+
+    /*
+    // CONFIGURACION B - ESCENARIO PRUEBA DE CARGA MASIVA
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 1550);
+
+    int cada_cuantos_paquetes = 500;
+
+	//productor
+    thread productor_1(productor, 1, 516, cada_cuantos_paquetes);
+    thread productor_2(productor, 2, 517, cada_cuantos_paquetes);
+    thread productor_3(productor, 3, 517, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 1550);
+
+    consumidor_1.join();
+    productor_1.join();
+    productor_2.join();
+    productor_3.join();
+    gestor_1.join();
+    */
+
+    /*
+    // CONFIGURACION A - ESCENARIO PRUEBA DE CARGA MASIVA
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 1550);
+
+    int cada_cuantos_paquetes = 500;
+
+	//productor
+    thread productor_1(productor, 1, 1550, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 775);
+    thread consumidor_2(consumidor, 2, 775);
+
+    consumidor_1.join();
+    consumidor_2.join();
+    productor_1.join();
+    gestor_1.join();
+    */
+
+    /*
+    // CONFIGURACION C - ESCENARIO VACUIDAD
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 0);
+
+    int cada_cuantos_paquetes = 500;
+
+	//productor
+    thread productor_1(productor, 1, 0, cada_cuantos_paquetes);
+    thread productor_2(productor, 2, 0, cada_cuantos_paquetes);
+    thread productor_3(productor, 3, 0, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 0);
+    thread consumidor_2(consumidor, 2, 0);
+    thread consumidor_3(consumidor, 3, 0);
+
+    consumidor_1.join();
+    consumidor_2.join();
+    consumidor_3.join();
+    productor_1.join();
+    productor_2.join();
+    productor_3.join();
+    gestor_1.join();
+    */
+
+
+    /*
+    // CONFIGURACION B - ESCENARIO VACUIDAD
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 0);
+
+    int cada_cuantos_paquetes = 500;
+
+	//productor
+    thread productor_1(productor, 1, 0, cada_cuantos_paquetes);
+    thread productor_2(productor, 2, 0, cada_cuantos_paquetes);
+    thread productor_3(productor, 3, 0, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 0);
+
+    consumidor_1.join();
+    productor_1.join();
+    productor_2.join();
+    productor_3.join();
+    gestor_1.join();
+    */
+
+    /*
+    // CONFIGURACION A - ESCENARIO VACUIDAD
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 0);
+
+    int cada_cuantos_paquetes = 500;
+
+	//productor
+    thread productor_1(productor, 1, 0, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 0);
+    thread consumidor_2(consumidor, 2, 0);
+
+    consumidor_1.join();
+    consumidor_2.join();
+    productor_1.join();
+    gestor_1.join();
+    */
+
+    /*
+    // CONFIGURACION C - ESCENARIO SATURACION DE RECURSOS
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 8);
+
+    int cada_cuantos_paquetes = 0;
+
+	//productor
+    thread productor_1(productor, 1, 2, cada_cuantos_paquetes);
+    thread productor_2(productor, 2, 3, cada_cuantos_paquetes);
+    thread productor_3(productor, 3, 3, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 2);
+    thread consumidor_2(consumidor, 2, 3);
+    thread consumidor_3(consumidor, 3, 3);
+
+    consumidor_1.join();
+    consumidor_2.join();
+    consumidor_3.join();
+    productor_1.join();
+    productor_2.join();
+    productor_3.join();
+    gestor_1.join();
+    */
+
+
+    /*
+    // CONFIGURACION B - ESCENARIO SATURACION DE RECURSOS
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 8);
+
+    int cada_cuantos_paquetes = 0;
+
+	//productor
+    thread productor_1(productor, 1, 3, cada_cuantos_paquetes);
+    thread productor_2(productor, 2, 3, cada_cuantos_paquetes);
+    thread productor_3(productor, 3, 2, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 8);
+
+    consumidor_1.join();
+    productor_1.join();
+    productor_2.join();
+    productor_3.join();
+    gestor_1.join();
+    */
+
+    /*
+    // CONFIGURACION A - ESCENARIO SATURACION DE RECURSOS
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 8);
+
+    int cada_cuantos_paquetes = 0;
+
+	//productor
+    thread productor_1(productor, 1, 8, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 4);
+    thread consumidor_2(consumidor, 2, 4);
+
+    consumidor_1.join();
+    consumidor_2.join();
+    productor_1.join();
+    gestor_1.join();
+    */
+
+    /*
+    // CONFIGURACION C - ESCENARIO EQUIDAD
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 20);
+
+    int cada_cuantos_paquetes = 12;
+
+	//productor
+    thread productor_1(productor, 1, 6, cada_cuantos_paquetes);
+    thread productor_2(productor, 2, 7, cada_cuantos_paquetes);
+    thread productor_3(productor, 3, 7, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 6);
+    thread consumidor_2(consumidor, 2, 7);
+    thread consumidor_3(consumidor, 3, 7);
+
+    consumidor_1.join();
+    consumidor_2.join();
+    consumidor_3.join();
+    productor_1.join();
+    productor_2.join();
+    productor_3.join();
+    gestor_1.join();
+    */
+
+
+    /*
+    // CONFIGURACION B - ESCENARIO EQUIDAD
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 20);
+
+    int cada_cuantos_paquetes = 12;
+
+	//productor
+    thread productor_1(productor, 1, 6, cada_cuantos_paquetes);
+    thread productor_2(productor, 2, 7, cada_cuantos_paquetes);
+    thread productor_3(productor, 3, 7, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 20);
+
+    consumidor_1.join();
+    productor_1.join();
+    productor_2.join();
+    productor_3.join();
+    gestor_1.join();
+    */
+
+    /*
+    // CONFIGURACION A - ESCENARIO EQUIDAD
+    init(sem_estanteria, 0);
+    //CINTA
+    init(sem_cinta, 0);
+    init(sem_espacio_cinta, cantidad_Maxima_cinta);
+
+    // gestor
+    thread gestor_1(gestor, 20);
+
+    int cada_cuantos_paquetes = 12;
+
+	//productor
+    thread productor_1(productor, 1, 20, cada_cuantos_paquetes);
+
+    thread consumidor_1(consumidor, 1, 10);
+    thread consumidor_2(consumidor, 2, 10);
+
+    consumidor_1.join();
+    consumidor_2.join();
+    productor_1.join();
+    gestor_1.join();
+    */
+
+    mostrarMetricas(tiempo_espera_p1, tiempo_espera_p0, cant_producidos_p1, cant_producidos_p0);
 
     return 0;
 }
