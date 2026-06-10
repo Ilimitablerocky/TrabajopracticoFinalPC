@@ -1,9 +1,9 @@
 #include "gestor.h"
 
-void gestor() {  
+void gestor(int paquetes_totales) {  
     int procesados = 0;
 
-    while (procesados < cantidad_Maxima_Paquetes) {
+    while (procesados < paquetes_totales) {
 
         wait(sem_estanteria);  // Espera a un paquete en la estanteria
 
@@ -21,8 +21,6 @@ void gestor() {
         }
         
         mutex_estanteria.unlock();  // Se desbloquea el mutex de la estanteria
-
-        signal(sem_espacio_estanteria);  // Se da aviso de que hay espacio en la estanteria para el productor
 
         wait(sem_espacio_cinta);  // Se espera a que haya espacio en la cinta
 
