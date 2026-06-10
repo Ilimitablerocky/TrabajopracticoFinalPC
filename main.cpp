@@ -145,7 +145,7 @@ int main() {
     // gestor
     thread gestor_1(gestor, 0);
 
-    int cada_cuantos_paquetes = 500;
+    int cada_cuantos_paquetes = 0;
 
 	//productor
     thread productor_1(productor, 1, 0, cada_cuantos_paquetes);
@@ -176,7 +176,7 @@ int main() {
     // gestor
     thread gestor_1(gestor, 0);
 
-    int cada_cuantos_paquetes = 500;
+    int cada_cuantos_paquetes = 0;
 
 	//productor
     thread productor_1(productor, 1, 0, cada_cuantos_paquetes);
@@ -202,7 +202,7 @@ int main() {
     // gestor
     thread gestor_1(gestor, 0);
 
-    int cada_cuantos_paquetes = 500;
+    int cada_cuantos_paquetes = 0;
 
 	//productor
     thread productor_1(productor, 1, 0, cada_cuantos_paquetes);
