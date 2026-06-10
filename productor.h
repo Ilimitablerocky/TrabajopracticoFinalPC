@@ -4,10 +4,7 @@
 #include "semaforo.h"
 #include <thread>
 
-extern const int cantidad_Maxima_Paquetes;
-extern const int cantidad_Maxima_Estanteria;
 extern const int cantidad_Maxima_cinta;
-extern const int frecuencia_prioridad_0;
 
 //VARIABLE productor/gestor
 extern int cantidad_actual_estanteria;
@@ -19,13 +16,12 @@ extern int cant_producidos_p0;
 extern Paquete estanteria[];
 extern std::mutex mutex_estanteria;
 extern Semaforo sem_estanteria;
-extern Semaforo sem_espacio_estanteria;
 
 extern std::mutex mutex_consola;
 extern std::mutex mutex_idpaquete;
 
 int generar_prioridad_con_frecuencia(int cada_cuantos_paquetes);
 
-void productor(int id, int paquetes_x_productor);
+void productor(int id, int paquetes_x_productor, int cada_cuantos_paquetes);
 
 #endif // PRODUCTOR_H_INCLUDED
