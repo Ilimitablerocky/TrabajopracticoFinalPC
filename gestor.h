@@ -4,8 +4,6 @@
 #include "semaforo.h"
 
 using namespace std;
-extern const int cantidad_Maxima_Paquetes;
-extern const int cantidad_Maxima_Estanteria;
 extern const int cantidad_Maxima_cinta;
 
 //VARIABLE productor/gestor
@@ -18,7 +16,6 @@ extern int tiempo_espera_p0;
 extern Paquete estanteria[];
 extern std::mutex mutex_estanteria;
 extern Semaforo sem_estanteria;
-extern Semaforo sem_espacio_estanteria;
 
 //CINTA...
 extern std::queue<Paquete> cinta;
@@ -28,4 +25,4 @@ extern Semaforo sem_espacio_cinta;
 
 extern std::mutex mutex_consola;
 
-void gestor();
+void gestor(int paquetes_totales);
